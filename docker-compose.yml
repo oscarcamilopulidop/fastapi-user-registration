@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    command: uvicorn --reload app.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./app:/code/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - .env
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - 5432:5432
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+      - 1025:1025
+volumes:
+  db_data:
