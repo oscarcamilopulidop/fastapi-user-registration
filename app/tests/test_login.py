@@ -2,12 +2,9 @@ import pytest
 from fastapi.testclient import TestClient
 from main import app
 from schemas.user import User
-from dependencies import get_user_repository
 from repository.user_repository import UserRepository
-from fastapi import Depends
 from config.database import Database
 from fastapi import status
-from services.login_service import LoginService
 import os
 
 from utils.auth import get_password_hash
