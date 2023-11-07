@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, validator, EmailStr
 from typing import Optional
 
 
 class EmailUser(BaseModel):
-    email: str = Field(..., example="johndoe@example.com")
+    email: EmailStr = Field(..., example="johndoe@example.com")
 
 
 class BaseUser(EmailUser):
